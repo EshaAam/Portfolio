@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #a855f7;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Selection */
+::selection {
+  background: rgba(168, 85, 247, 0.3);
+  color: #fafafa;
+}
+
+/* Section snap scrolling */
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(17, 17, 24, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 60px rgba(168, 85, 247, 0.25);
+}
+
+/* Button styles */
+.btn-primary {
+  @apply relative overflow-hidden px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  @apply bg-gradient-to-r from-accent to-indigo-500 text-white;
+  @apply hover:shadow-glow hover:scale-[1.02] active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply relative overflow-hidden px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  @apply border border-accent/50 text-accent bg-transparent;
+  @apply hover:bg-accent/10 hover:border-accent hover:shadow-glow;
+}
+
+/* Card styles */
+.card {
+  @apply relative rounded-xl p-6 transition-all duration-300;
+  @apply bg-surface border border-white/5;
+  @apply hover:border-accent/30 hover:shadow-glow;
+}
+
+/* Section title */
+.section-title {
+  @apply text-3xl md:text-4xl font-bold mb-4 gradient-text;
+}
+
+.section-subtitle {
+  @apply text-muted text-lg max-w-2xl;
+}
+
+/* Nav link underline animation */
+.nav-link {
+  @apply relative py-2 text-foreground-muted hover:text-foreground transition-colors duration-300;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  @apply w-full;
+}
+
+.nav-link.active {
+  @apply text-accent;
+}
+
+/* Hide scrollbar for specific elements */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Particle canvas positioning */
+.particles-container {
+  @apply fixed inset-0 -z-10 pointer-events-none;
+}
+
+/* Preloader */
+.preloader {
+  @apply fixed inset-0 z-[9999] flex items-center justify-center bg-background;
+}
+
+.preloader-spinner {
+  @apply w-12 h-12 border-4 border-accent/20 border-t-accent rounded-full animate-spin;
+}
+
+
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 270 91% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 10% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 5% 45%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 270 91% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5% 15%;
+    --input: 240 5% 15%;
+    --ring: 270 91% 65%;
+    --chart-1: 270 91% 65%;
+    --chart-2: 240 70% 60%;
+    --chart-3: 200 70% 50%;
+    --chart-4: 160 60% 45%;
+    --chart-5: 340 75% 55%;
+    --radius: 0.75rem;
+  }
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 270 91% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 10% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 5% 45%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 270 91% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5% 15%;
+    --input: 240 5% 15%;
+    --ring: 270 91% 65%;
+    --chart-1: 270 91% 65%;
+    --chart-2: 240 70% 60%;
+    --chart-3: 200 70% 50%;
+    --chart-4: 160 60% 45%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
