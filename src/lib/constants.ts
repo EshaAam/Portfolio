@@ -11,8 +11,8 @@ import {
 export const NAV_SECTIONS: NavSection[] = [
   { id: "hero", label: "Home", href: "#hero" },
   { id: "about", label: "About", href: "#about" },
-  { id: "skills", label: "Skills", href: "#skills" },
   { id: "projects", label: "Projects", href: "#projects" },
+  { id: "skills", label: "Skills", href: "#skills" },
   { id: "labs", label: "Research", href: "#labs" },
   { id: "resume", label: "Resume", href: "#resume" },
   { id: "contact", label: "Contact", href: "#contact" },

@@ -33,8 +33,8 @@ export default function Home() {
       <main className="relative">
         <Hero />
         <About />
-        <Skills />
         <Projects />
+        <Skills />
         <Labs />
         <Resume />
         <Contact />
