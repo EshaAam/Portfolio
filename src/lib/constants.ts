@@ -11,11 +11,54 @@ import {
 export const NAV_SECTIONS: NavSection[] = [
   { id: "hero", label: "Home", href: "#hero" },
   { id: "about", label: "About", href: "#about" },
+  { id: "journey", label: "Journey", href: "#journey" },
   { id: "projects", label: "Projects", href: "#projects" },
   { id: "skills", label: "Skills", href: "#skills" },
   { id: "labs", label: "Research", href: "#labs" },
   { id: "resume", label: "Resume", href: "#resume" },
   { id: "contact", label: "Contact", href: "#contact" },
+];
+
+export interface JourneyItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  period: string;
+  description?: string;
+  logo?: string;
+  location?: string;
+}
+
+export const EDUCATION_DATA: JourneyItem[] = [
+  {
+    id: "uni",
+    title: "BSc Engineering in Software Engineering",
+    subtitle: "Islamic University of Technology (IUT)",
+    period: "2022 - Present",
+    // description: "CGPA: 3.x/4.00", 
+    location: "Gazipur, Bangladesh",
+    logo: "/iut-logo.jpg"
+  },
+  {
+    id: "college",
+    title: "Higher Secondary Certificate",
+    subtitle: "Rajuk Uttara Model College",
+    period: "2019 - 2021",
+    // description: "GPA: 5.00/5.00",
+    location: "Dhaka, Bangladesh",
+    logo: "/Rajuk-logo.png"
+  },
+];
+
+export const EXPERIENCE_DATA: JourneyItem[] = [
+  {
+    id: "savoy",
+    title: "Associate Software Engineer",
+    subtitle: "Savoy Ice Cream",
+    period: "2024 - Present", // Assuming current year based on user input, or just "Present"
+    description: "Working on enterprise software solutions and optimizing internal systems.",
+    location: "Dhaka, Bangladesh",
+  },
 ];
 
 // About section points
