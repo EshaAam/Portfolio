@@ -10,6 +10,7 @@ import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import { Labs } from "@/components/sections/Labs";
+import { Journey } from "@/components/sections/Journey";
 import { Contact } from "@/components/sections/Contact";
 import { Resume } from "@/components/sections/Resume";
 
@@ -33,6 +34,7 @@ export default function Home() {
       <main className="relative">
         <Hero />
         <About />
+        <Journey />
         <Projects />
         <Skills />
         <Labs />
