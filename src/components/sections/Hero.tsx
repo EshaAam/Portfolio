@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, FileText, FolderOpen, Mail } from "lucide-react";
+import { ArrowDown, FolderOpen } from "lucide-react";
 import Typewriter from "typewriter-effect";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SpaceButton } from "@/components/ui/SpaceButton";
@@ -74,9 +74,9 @@ export function Hero() {
                 options={{
                   strings: [
                     PERSONAL_INFO.role,
-                    "System Architecture Enthusiast",
-                    "Security-Conscious Developer",
-                    "API Design Specialist",
+                    "Frontend Specialist",
+                    "Security-Conscious",
+                    "Scalable Solutions Builder",
                   ],
                   autoStart: true,
                   loop: true,

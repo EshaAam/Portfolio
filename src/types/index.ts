@@ -47,6 +47,8 @@ export interface Lab {
   category: "security" | "networking" | "testing" | "devops" | "research";
   skills: string[];
   icon: string;
+  githubUrl?: string;
+  isDemo?: boolean;
 }
 
 // Social link types

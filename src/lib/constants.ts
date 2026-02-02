@@ -64,28 +64,32 @@ export const EXPERIENCE_DATA: JourneyItem[] = [
 // About section points
 export const ABOUT_POINTS: AboutPoint[] = [
   {
-    icon: "server",
-    text: "Backend-first mindset — I design systems before writing code",
+    icon: "layout",
+    text: "Systems-first approach — I focus on design, data flow, and responsibilities before implementation",
   },
   {
-    icon: "shield",
-    text: "Security-conscious development with RBAC, auth flows, and API protection",
+    icon: "server",
+    text: "Backend-leaning full stack — Comfortable across APIs, auth flows, and frontend integration",
   },
+  // {
+  //   icon: "shield",
+  //   text: "Security-aware development — Experience with RBAC, authentication flows, and protected routes",
+  // },
   {
     icon: "database",
-    text: "Database design experience with MongoDB and MySQL optimization",
+    text: "Database-focused thinking — Hands-on with MongoDB, MySQL, PostgreSQL schema design and optimization",
   },
   {
     icon: "code",
-    text: "Clean, maintainable code with TypeScript and proper architecture",
+    text: "Clean, maintainable code — TypeScript, proper layering, and readable architecture",
   },
-  {
-    icon: "zap",
-    text: "Performance-focused with caching strategies and query optimization",
-  },
+  // {
+  //   icon: "zap",
+  //   text: "Performance-conscious — Care about query efficiency, caching, and avoiding unnecessary complexity",
+  // },
   {
     icon: "git-branch",
-    text: "Version control discipline with meaningful commits and branching",
+    text: "Version control discipline — Meaningful commits, clean history, and collaborative workflows",
   },
 ];
 
@@ -165,8 +169,78 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
   },
 ];
 
-// Projects data
+// Projects data - Ordered by priority (Live projects first)
 export const PROJECTS: Project[] = [
+  {
+    id: "vibe-shopping",
+    title: "VibeShopping - E-Commerce Platform",
+    subtitle: "Modern Next.js E-Commerce",
+    problem:
+      "Modern e-commerce requires fast, SEO-friendly platforms with seamless user experience, secure payments, and efficient admin controls.",
+    solution:
+      "Developing a modern e-commerce platform with product listings, cart management, and admin controls. Implementing search, filtering, authentication, and secure payment workflows. Built with Next.js 15 and ShadCN UI; continuously deployed on Vercel.",
+    architecture:
+      "Next.js 15 with App Router, TypeScript for type safety, PostgreSQL with Prisma ORM, ShadCN UI components. Server components for optimal performance.",
+    challenges: [
+      "Building type-safe database queries with Prisma",
+      "Implementing secure payment workflow integration",
+      "Creating responsive admin dashboard",
+      "Optimizing for SEO with Next.js App Router",
+    ],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "ShadCN UI",
+      "Vercel",
+    ],
+    highlights: [
+      { label: "Framework", value: "Next.js 15" },
+      { label: "Database", value: "PostgreSQL" },
+      { label: "ORM", value: "Prisma" },
+      { label: "Deploy", value: "Vercel" },
+    ],
+    githubUrl: "https://github.com/EshaAam/VibeShopping",
+    liveUrl: "https://vibe-shopping-one.vercel.app/",
+    image: "/vibeshopping.png",
+    featured: true,
+  },
+  {
+    id: "wander-bangladesh",
+    title: "Wander Bangladesh - Travel Vlog",
+    subtitle: "Cinematic Travel Storytelling Platform",
+    problem:
+      "Travel content often lacks immersive presentation. Users want to experience destinations visually before visiting, with engaging 3D scroll experiences and atmospheric design.",
+    solution:
+      "Built a premium, cinematic travel storytelling platform showcasing Bangladesh's breathtaking destinations through immersive 3D scroll experiences. Features spatial 3D cards, atmospheric transitions, and fluid scroll-driven animations with a dark editorial aesthetic.",
+    architecture:
+      "Next.js 16 with App Router, React 19, TypeScript, Tailwind CSS 4 for styling, Framer Motion for cinematic animations. Smart image fallback system with category-based recovery.",
+    challenges: [
+      "Implementing cinematic 3D scroll experiences with perspective transforms",
+      "Building smart image fallback system with category-based recovery",
+      "Creating atmospheric visual design with grain textures and particle systems",
+      "Optimizing performance for smooth scroll-driven animations",
+    ],
+    technologies: [
+      "Next.js",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Vercel",
+    ],
+    highlights: [
+      { label: "Framework", value: "Next.js 16" },
+      { label: "Animations", value: "3D Scroll" },
+      { label: "Design", value: "Cinematic" },
+      { label: "Deploy", value: "Vercel" },
+    ],
+    githubUrl: "https://github.com/EshaAam/wander-bangladesh",
+    liveUrl: "https://wander-bangladesh.vercel.app/",
+    image: "/wander_bangladesh.png",
+    featured: true,
+  },
   {
     id: "e-blog",
     title: "E-Blog - Personal Blogging Platform",
@@ -201,39 +275,6 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
-    id: "vibe-shopping",
-    title: "VibeShopping - E-Commerce Platform",
-    subtitle: "Modern Next.js E-Commerce (In Progress)",
-    problem:
-      "Modern e-commerce requires fast, SEO-friendly platforms with seamless user experience, secure payments, and efficient admin controls.",
-    solution:
-      "Developing a modern e-commerce platform with product listings, cart management, and admin controls. Implementing search, filtering, authentication, and secure payment workflows. Built with Next.js 15 and ShadCN UI; continuously deployed on Vercel.",
-    architecture:
-      "Next.js 15 with App Router, TypeScript for type safety, PostgreSQL with Prisma ORM, ShadCN UI components. Server components for optimal performance.",
-    challenges: [
-      "Building type-safe database queries with Prisma",
-      "Implementing secure payment workflow integration",
-      "Creating responsive admin dashboard",
-      "Optimizing for SEO with Next.js App Router",
-    ],
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "PostgreSQL",
-      "Prisma",
-      "ShadCN UI",
-      "Vercel",
-    ],
-    highlights: [
-      { label: "Framework", value: "Next.js 15" },
-      { label: "Database", value: "PostgreSQL" },
-      { label: "ORM", value: "Prisma" },
-      { label: "Deploy", value: "Vercel" },
-    ],
-    githubUrl: "https://github.com/EshaAam/VibeShopping",
-    featured: true,
-  },
-  {
     id: "gadget-mart",
     title: "GadgetMart - Multi-Vendor E-Commerce",
     subtitle: "Team Project - Marketplace Platform",
@@ -265,39 +306,6 @@ export const PROJECTS: Project[] = [
     githubUrl: "https://github.com/EshaAam",
     featured: true,
   },
-  {
-    id: "api-testing-framework",
-    title: "API Testing & Load Testing Framework",
-    subtitle: "Automated API Quality Assurance",
-    problem:
-      "Manual API testing is time-consuming and inconsistent. Load testing is often skipped, leading to production performance issues. Teams need automated, repeatable testing pipelines.",
-    solution:
-      "Created a testing framework integrating unit tests, integration tests, and load tests. Features automated test generation from OpenAPI specs, performance benchmarking, and detailed reporting with trend analysis.",
-    architecture:
-      "Jest for unit tests, custom integration test runner, k6 for load testing. GitHub Actions integration for CI/CD. MongoDB for test result storage and trend tracking.",
-    challenges: [
-      "Built dynamic test generation from API documentation",
-      "Implemented parallel test execution with isolated environments",
-      "Created performance regression detection algorithms",
-      "Designed clear visualization for complex test reports",
-    ],
-    technologies: [
-      "Node.js",
-      "Jest",
-      "k6",
-      "Docker",
-      "GitHub Actions",
-      "TypeScript",
-    ],
-    highlights: [
-      { label: "Test Types", value: "4" },
-      { label: "Max RPS", value: "10k+" },
-      { label: "Metrics Tracked", value: "20+" },
-      { label: "CI Integration", value: "Yes" },
-    ],
-    githubUrl: "https://github.com/EshaAam",
-    featured: false,
-  },
 ];
 
 // Research
@@ -306,10 +314,11 @@ export const LABS: Lab[] = [
     id: "llm-evaluation",
     title: "LLM Evaluation Research",
     description:
-      "Published research on Large Language Model evaluation methodologies. Analyzed model performance metrics and evaluation frameworks.",
+      "Research on Large Language Model evaluation for Medical QnA using the Icliniq Dataset. Analyzed model performance metrics and evaluation frameworks.",
     category: "research",
     skills: ["LLM", "NLP", "Model Evaluation", "Pandas", "NumPy"],
     icon: "brain",
+    githubUrl: "https://github.com/EshaAam/Evaluation_of_LLMs_on_Medical_QNA_based_on_Icliniq_Dataset-",
   },
   {
     id: "penetration-testing",
@@ -319,6 +328,7 @@ export const LABS: Lab[] = [
     category: "security",
     skills: ["Burp Suite", "OWASP ZAP", "SQL Injection", "XSS", "CSRF"],
     icon: "shield-alert",
+    isDemo: true,
   },
   {
     id: "network-security",
@@ -328,6 +338,7 @@ export const LABS: Lab[] = [
     category: "networking",
     skills: ["Wireshark", "Nmap", "Firewall", "VPN", "IDS/IPS"],
     icon: "network",
+    isDemo: true,
   },
   {
     id: "container-security",
@@ -337,6 +348,7 @@ export const LABS: Lab[] = [
     category: "devops",
     skills: ["Docker", "Kubernetes", "Trivy", "Image Scanning", "RBAC"],
     icon: "box",
+    isDemo: true,
   },
 ];
 

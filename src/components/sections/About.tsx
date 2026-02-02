@@ -25,18 +25,20 @@ export function About() {
             <div className="prose prose-invert max-w-none">
               <p className="text-foreground-muted leading-relaxed text-lg">
                 I&apos;m <span className="text-accent font-medium">{PERSONAL_INFO.name}</span>,
-                a Computer Science student with a strong interest in designing and building scalable software systems.
+                a Software Engineering undergraduate who enjoys thinking about how systems should work before writing code. I&apos;m most comfortable when I can break a problem down, understand the trade-offs, and design something that stays clean as it grows.
               </p>
               <p className="text-foreground-muted leading-relaxed mt-4">
-                My work focuses on <span className="text-foreground">backend architecture</span>,
-                <span className="text-foreground"> frontend</span>,
-                <span className="text-foreground"> design</span>,
-                <span className="text-foreground"> database design</span>, and developing secure, maintainable APIs. I value understanding system requirements and trade-offs before implementation, aiming to build solutions that are both robust and cleanly structured.
+                My work spans <span className="text-foreground">backend architecture</span>,
+                <span className="text-foreground"> frontend development</span>, and
+                <span className="text-foreground"> database design</span>, with a strong focus on writing maintainable, secure APIs. I care about structure, clear responsibilities, and choosing simple solutions that don&apos;t fall apart later.
               </p>
-              <p className="text-foreground-muted leading-relaxed mt-4">
+              {/* <p className="text-foreground-muted leading-relaxed mt-4">
                 I primarily work with <span className="text-foreground">Next.js</span>,
                 <span className="text-foreground"> Laravel</span>, and
-                <span className="text-foreground"> Node.js</span>, and have hands-on experience with databases such as MongoDB and MySQL.
+                <span className="text-foreground"> Node.js</span>, and I&apos;ve built real projects using MongoDB and MySQL, where I&apos;ve had hands-on experience with schema design, query optimization, and authentication flows. I value clarity over cleverness and prefer code that&apos;s easy to reason about, test, and extend.
+              </p> */}
+              <p className="text-foreground-muted leading-relaxed mt-4 italic text-sm">
+                I&apos;m still learning — but I learn by building, breaking things, and refining them until they make sense.
               </p>
             </div>
           </motion.div>
@@ -50,11 +52,12 @@ export function About() {
             className="space-y-4"
           >
             {ABOUT_POINTS.map((point, index) => {
-              const IconComponent = (Icons as Record<string, React.ComponentType<{ className?: string }>>)[
-                point.icon.split("-").map((w, i) => 
-                  i === 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w.charAt(0).toUpperCase() + w.slice(1)
-                ).join("")
-              ] || Icons.Circle;
+              // Convert icon name from kebab-case to PascalCase (e.g., "git-branch" -> "GitBranch")
+              const iconName = point.icon
+                .split("-")
+                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                .join("");
+              const IconComponent = (Icons[iconName as keyof typeof Icons] as React.ComponentType<{ className?: string }>) || Icons.Circle;
 
               return (
                 <motion.div
