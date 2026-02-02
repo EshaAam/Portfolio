@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart, Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { fadeInUp } from "@/lib/motion";
 import { SOCIAL_LINKS, PERSONAL_INFO } from "@/lib/constants";
 

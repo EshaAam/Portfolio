@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { GitHubCalendar } from "react-github-calendar";
-import { fadeInUp } from "@/lib/motion";
 
 /**
  * GitHub Activity Calendar Component

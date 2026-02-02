@@ -64,6 +64,7 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
   useEffect(() => {
     if (!enableSnapping) return;
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleWheel = (e: WheelEvent) => {
       const now = Date.now();
       
