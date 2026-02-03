@@ -17,12 +17,8 @@ export function ScrollShowcase() {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Sort projects: featured first
-  const sortedProjects = [...PROJECTS].sort((a, b) => {
-    if (a.featured && !b.featured) return -1;
-    if (!a.featured && b.featured) return 1;
-    return 0;
-  });
+  // Use projects in defined order (no sorting)
+  const projects = PROJECTS;
 
   // Set up IntersectionObserver to track which section is in viewport center
   useEffect(() => {
@@ -40,9 +36,9 @@ export function ScrollShowcase() {
           });
         },
         {
-          // Trigger when section is in the center 40% of viewport
-          rootMargin: "-30% 0px -30% 0px",
-          threshold: 0.1,
+          // Trigger when section is in the center portion of viewport
+          rootMargin: "-35% 0px -35% 0px",
+          threshold: 0.2,
         }
       );
 
@@ -53,14 +49,14 @@ export function ScrollShowcase() {
     return () => {
       observers.forEach((observer) => observer.disconnect());
     };
-  }, [sortedProjects.length]);
+  }, [projects.length]);
 
   // Callback ref to store section references
   const setSectionRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
     sectionRefs.current[index] = el;
   }, []);
 
-  const activeProject = sortedProjects[activeIndex] || sortedProjects[0];
+  const activeProject = projects[activeIndex] || projects[0];
 
   return (
     <div ref={containerRef} className="relative">
@@ -88,7 +84,7 @@ export function ScrollShowcase() {
 
         {/* Right: Scrollable Project Sections */}
         <div className="w-full lg:w-[55%] xl:w-[50%]">
-          {sortedProjects.map((project, index) => (
+          {projects.map((project, index) => (
             <ProjectSection
               key={project.id}
               ref={setSectionRef(index)}
@@ -102,7 +98,7 @@ export function ScrollShowcase() {
 
       {/* Navigation Dots - Desktop only */}
       <div className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 flex-col gap-3 z-40">
-        {sortedProjects.map((project, index) => (
+        {projects.map((project, index) => (
           <button
             key={project.id}
             onClick={() => {
