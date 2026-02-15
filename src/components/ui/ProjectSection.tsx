@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ChevronRight } from "lucide-react";
 import { Project } from "@/types";
@@ -22,11 +23,7 @@ export const ProjectSection = forwardRef<HTMLDivElement, ProjectSectionProps>(
       <div
         ref={ref}
         data-project-index={index}
-        className={`
-          min-h-[80vh] py-16 lg:py-24 flex flex-col justify-center
-          transition-all duration-500 ease-out
-          ${isActive ? "opacity-100" : "opacity-40 lg:opacity-50"}
-        `}
+        className="min-h-[80vh] py-16 lg:py-24 flex flex-col justify-center"
       >
         <motion.div
           initial="hidden"
@@ -42,10 +39,11 @@ export const ProjectSection = forwardRef<HTMLDivElement, ProjectSectionProps>(
           >
             <div className="relative aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-accent/20 via-indigo-500/20 to-purple-600/20 border border-white/10">
               {project.image ? (
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover object-top"
+                  fill
+                  className="object-cover object-top"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
@@ -56,6 +54,30 @@ export const ProjectSection = forwardRef<HTMLDivElement, ProjectSectionProps>(
                 </div>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              
+              {/* Mobile Live Button */}
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-3 right-3 group/live inline-flex items-center gap-2 px-4 py-2 rounded-full overflow-hidden text-sm font-semibold"
+                >
+                  {/* Button background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 opacity-90" />
+                  <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 blur-md opacity-40" />
+                  
+                  {/* Content */}
+                  <span className="relative flex items-center gap-2 text-white">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                    </span>
+                    Live
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </span>
+                </a>
+              )}
             </div>
           </motion.div>
 
@@ -184,17 +206,29 @@ export const ProjectSection = forwardRef<HTMLDivElement, ProjectSectionProps>(
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`
-                  inline-flex items-center gap-2 px-4 py-2 rounded-lg
-                  text-sm font-medium transition-all duration-300
-                  ${isActive
-                    ? "bg-accent text-white hover:bg-accent/90"
-                    : "bg-white/10 text-muted hover:bg-white/20"
-                  }
-                `}
+                className="relative group/live inline-flex items-center gap-2 px-5 py-2.5 rounded-full overflow-hidden text-sm font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
               >
-                <ExternalLink className="w-4 h-4" />
-                Live Demo
+                {/* Button background with animated gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 opacity-90" />
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 opacity-0 group-hover/live:opacity-100 transition-opacity duration-300" />
+                
+                {/* Animated shine effect */}
+                <div className="absolute inset-0 opacity-0 group-hover/live:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/live:translate-x-full transition-transform duration-700" />
+                </div>
+                
+                {/* Glow effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 blur-lg opacity-30 group-hover/live:opacity-50 transition-opacity" />
+                
+                {/* Content */}
+                <span className="relative flex items-center gap-2 text-white">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                  </span>
+                  Live Demo
+                  <ExternalLink className="w-4 h-4" />
+                </span>
               </a>
             )}
           </motion.div>

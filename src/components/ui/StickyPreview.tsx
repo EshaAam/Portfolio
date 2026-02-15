@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import { Project } from "@/types";
 
 interface StickyPreviewProps {
@@ -26,7 +27,7 @@ export function StickyPreview({ activeProject, activeIndex }: StickyPreviewProps
             className="relative w-full max-w-2xl"
           >
             {/* Laptop Device Frame */}
-            <div className="relative">
+            <div className="relative group">
               {/* Screen bezel */}
               <div className="relative bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-t-xl pt-3 px-3 pb-0">
                 {/* Camera dot */}
@@ -71,11 +72,48 @@ export function StickyPreview({ activeProject, activeIndex }: StickyPreviewProps
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="absolute bottom-4 left-4 right-4"
+                    className="absolute bottom-4 left-4 right-4 flex items-center justify-between"
                   >
                     <p className="text-sm font-medium text-accent/90">
                       {activeProject.subtitle}
                     </p>
+                    
+                    {/* Premium Live Button */}
+                    {activeProject.liveUrl && (
+                      <motion.a
+                        href={activeProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.4 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="relative group/live flex items-center gap-2 px-4 py-2 rounded-full overflow-hidden"
+                      >
+                        {/* Button background with animated gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 opacity-90" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 opacity-0 group-hover/live:opacity-100 transition-opacity duration-300" />
+                        
+                        {/* Animated shine effect */}
+                        <div className="absolute inset-0 opacity-0 group-hover/live:opacity-100 transition-opacity duration-300">
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/live:translate-x-full transition-transform duration-700" />
+                        </div>
+                        
+                        {/* Glow effect */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 blur-lg opacity-40 group-hover/live:opacity-60 transition-opacity" />
+                        
+                        {/* Content */}
+                        <span className="relative flex items-center gap-2 text-white font-semibold text-sm">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                          </span>
+                          Live
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </span>
+                      </motion.a>
+                    )}
                   </motion.div>
                 </div>
               </div>
