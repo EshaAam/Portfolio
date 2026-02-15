@@ -115,7 +115,7 @@ export function Labs() {
                       {lab.githubUrl && !isDemo && (
                         <CardItem translateZ={60} className="w-full pt-4">
                           <motion.a
-                            href={lab.githubUrl}
+                            href="https://github.com/EshaAam/Evaluation_of_LLMs_on_Medical_QNA_based_on_Icliniq_Dataset-"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-accent/10 border border-accent/20 text-accent text-sm font-medium hover:bg-accent hover:text-white transition-all group/btn"
