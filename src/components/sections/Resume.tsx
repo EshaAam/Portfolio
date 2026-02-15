@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Eye, EyeOff, Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
+import { Download, Eye, EyeOff, Mail, Phone, Github, Linkedin } from "lucide-react";
 import { SectionWrapper, SectionHeader } from "@/components/ui/SectionWrapper";
 import { SpaceButton } from "@/components/ui/SpaceButton";
 import { fadeInUp } from "@/lib/motion";
