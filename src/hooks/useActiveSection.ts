@@ -1,81 +1,47 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { NAV_SECTIONS } from "@/lib/constants";
+import { useEffect, useState } from "react";
 
 /**
- * Hook to track which section is currently active based on scroll position
- * Uses scroll position calculation for accurate detection
+ * Tracks which section currently crosses the upper third of the viewport.
  */
-export function useActiveSection() {
-  const [activeSection, setActiveSection] = useState<string>("hero");
+export function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState<string>("");
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-      
-      // Find the section that is currently in view
-      let currentSection = "hero";
-      
-      for (const { id } of NAV_SECTIONS) {
-        const element = document.getElementById(id);
-        if (!element) continue;
-        
-        const offsetTop = element.offsetTop;
-        const offsetHeight = element.offsetHeight;
-        
-        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-          currentSection = id;
-          break;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
         }
-      }
-      
-      if (currentSection !== activeSection) {
-        setActiveSection(currentSection);
-      }
-    };
+      },
+      // A thin band at 35% of the viewport height
+      { rootMargin: "-35% 0px -64% 0px" }
+    );
 
-    // Initial check
-    handleScroll();
-    
-    // Add scroll listener with throttling
-    let ticking = false;
-    const scrollListener = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", scrollListener, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", scrollListener);
-    };
-  }, [activeSection]);
-
-  return activeSection;
-}
-
-/**
- * Hook to provide smooth scrolling to sections
- */
-export function useSmoothScroll() {
-  const scrollToSection = useCallback((sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (!element) return;
-
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
     });
 
-    // Update URL hash
-    window.history.pushState(null, "", `#${sectionId}`);
-  }, []);
+    const onScroll = () => {
+      if (window.scrollY < 200) setActive("");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
 
-  return { scrollToSection };
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [ids]);
+
+  return active;
+}
+
+/** Smoothly scrolls to a section by id (offset handled by CSS scroll-margin) */
+export function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.history.replaceState(null, "", id === "hero" ? " " : `#${id}`);
 }

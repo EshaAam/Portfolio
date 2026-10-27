@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import StyledComponentsRegistry from "@/lib/registry";
+import { MotionProvider } from "@/components/layout/MotionProvider";
+import { SITE } from "@/data/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,51 +16,54 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const title = `${SITE.name} | ${SITE.role}`;
+const description =
+  "Portfolio of Ekramul Esham, a full stack software engineer building scalable backends, polished Next.js frontends and LLM-powered systems, and co-author of research on LLM evaluation.";
+
 export const metadata: Metadata = {
-  title: "Ekramul Esham | Full Stack Developer",
-  description:
-    "Portfolio of Ekramul Esham - A full stack developer specializing in Next.js, Laravel, and scalable system architecture.",
+  metadataBase: new URL(SITE.url),
+  title,
+  description,
   keywords: [
     "Ekramul Esham",
+    "Ekramul Alam Esham",
+    "Software Engineer",
     "Full Stack Developer",
-    "Backend Developer",
     "Next.js",
-    "Laravel",
-    "TypeScript",
+    "FastAPI",
+    "LLM",
+    "RAG",
+    "IUT",
     "Portfolio",
   ],
-  authors: [{ name: "Ekramul Esham" }],
+  authors: [{ name: SITE.fullName, url: SITE.url }],
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Ekramul Esham | Full Stack Developer",
-    description:
-      "Portfolio of Ekramul Esham - A full stack developer.",
-    siteName: "Ekramul Esham Portfolio",
+    url: SITE.url,
+    title,
+    description,
+    siteName: `${SITE.name} Portfolio`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ekramul Esham | Full Stack Developer",
-    description:
-      "Portfolio of Ekramul Esham - A full stack developer.",
+    title,
+    description,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  themeColor: "#0a0a0f",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
-      >
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

@@ -102,6 +102,16 @@ export function ParticleBackground() {
         },
       },
       detectRetina: true,
+      // Fewer particles and no hover links on small screens
+      responsive: [
+        {
+          maxWidth: 768,
+          options: {
+            particles: { number: { value: 24 } },
+            interactivity: { events: { onHover: { enable: false } } },
+          },
+        },
+      ],
     }),
     []
   );
@@ -113,7 +123,7 @@ export function ParticleBackground() {
       id="tsparticles"
       particlesLoaded={particlesLoaded}
       options={options}
-      className="particles-container"
+      className="pointer-events-none fixed inset-0 -z-10"
     />
   );
 }

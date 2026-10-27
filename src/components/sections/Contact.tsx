@@ -2,296 +2,161 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
-import { SectionWrapper, SectionHeader } from "@/components/ui/SectionWrapper";
+import { ArrowRight, ArrowUpRight, CheckCircle2, Copy, Mail, MapPin } from "lucide-react";
+import { Section, SectionHeading } from "@/components/ui/Section";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { SocialIcon } from "@/components/ui/SocialIcon";
+import { Button } from "@/components/ui/Button";
 import { GitHubActivity } from "@/components/ui/GitHubActivity";
-import { fadeInUp, buttonVariants, staggerContainer } from "@/lib/motion";
-import { SOCIAL_LINKS, PERSONAL_INFO } from "@/lib/constants";
+import { fadeUp, revealViewport, stagger } from "@/lib/motion";
+import { SITE, SOCIAL_LINKS } from "@/data/site";
 
-// Icon mapping for social links
-const iconMap = {
-  mail: Mail,
-  github: Github,
-  linkedin: Linkedin,
-};
+const EMPTY_FORM = { name: "", email: "", subject: "", message: "" };
 
-/**
- * Contact section - Premium contact form with animated elements
- * Features glassmorphism design with GitHub activity calendar
- */
+const inputClasses =
+  "w-full rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-3 text-[15px] text-foreground placeholder:text-foreground-muted/50 transition-colors duration-200 focus:border-accent/50 focus:bg-white/[0.04] focus:outline-none";
+
 export function Contact() {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [sent, setSent] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const update = (field: keyof typeof EMPTY_FORM) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setForm((f) => ({ ...f, [field]: e.target.value }));
+
+  // Opens the visitor's mail client with the message pre-filled
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission - replace with actual submission logic
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Open mailto with form data
-    const mailtoLink = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(formState.subject)}&body=${encodeURIComponent(`From: ${formState.name}\nEmail: ${formState.email}\n\n${formState.message}`)}`;
-    window.location.href = mailtoLink;
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset after showing success
+    const body = `From: ${form.name}\nEmail: ${form.email}\n\n${form.message}`;
+    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(body)}`;
+    setSent(true);
     setTimeout(() => {
-      setIsSubmitted(false);
-      setFormState({ name: "", email: "", subject: "", message: "" });
-    }, 3000);
+      setSent(false);
+      setForm(EMPTY_FORM);
+    }, 4000);
+  };
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(SITE.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${SITE.email}`;
+    }
   };
 
   return (
-    <SectionWrapper id="contact" className="flex items-center">
-      <div className="max-w-5xl mx-auto w-full py-20">
-        <SectionHeader
-          title="Get In Touch"
-          subtitle="Have a project in mind? Let's build something amazing together."
-        />
+    <Section id="contact">
+      <SectionHeading
+        eyebrow="Contact"
+        title="Let's build something together"
+        description="Open to software engineering roles, research collaborations and interesting problems. My inbox is always open."
+      />
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid lg:grid-cols-5 gap-12 items-start"
-        >
-          {/* Left side - Contact info */}
-          <motion.div variants={fadeInUp} className="lg:col-span-2 space-y-8">
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-foreground">Let&apos;s connect</h3>
-              <p className="text-foreground-muted leading-relaxed">
-                I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of something great.
-              </p>
-            </div>
-
-            {/* Quick contact */}
-            <div className="space-y-4">
-              <motion.a
-                href={`mailto:${PERSONAL_INFO.email}`}
-                className="flex items-center gap-4 p-4 rounded-xl bg-surface/50 border border-white/5 hover:border-accent/30 transition-all group"
-                whileHover={{ x: 5 }}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={revealViewport}
+        variants={stagger(0.1)}
+        className="grid gap-4 lg:grid-cols-5"
+      >
+        {/* Info column */}
+        <motion.div variants={fadeUp} className="flex flex-col gap-4 lg:col-span-2">
+          <SpotlightCard className="p-6 sm:p-7">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground-muted">Email</p>
+            <a href={`mailto:${SITE.email}`} className="mt-2 block break-all text-lg font-medium text-foreground transition-colors hover:text-accent-light sm:text-xl">
+              {SITE.email}
+            </a>
+            <div className="mt-5 flex flex-wrap gap-2">
+              <a
+                href={`mailto:${SITE.email}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3 py-1.5 text-xs text-foreground-muted transition-colors hover:border-white/20 hover:text-foreground"
               >
-                <div className="p-3 rounded-lg bg-accent/10 text-accent group-hover:bg-accent group-hover:text-white transition-all">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted">Email me at</p>
-                  <p className="text-foreground font-medium">{PERSONAL_INFO.email}</p>
-                </div>
-              </motion.a>
+                <Mail className="h-3.5 w-3.5" /> Compose
+              </a>
+              <button
+                onClick={copyEmail}
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3 py-1.5 text-xs text-foreground-muted transition-colors hover:border-white/20 hover:text-foreground"
+              >
+                {copied ? <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                {copied ? "Copied" : "Copy"}
+              </button>
             </div>
+          </SpotlightCard>
 
-            {/* Social links */}
-            <div className="space-y-3">
-              <p className="text-sm text-muted uppercase tracking-wider">Find me on</p>
-              <div className="flex items-center gap-3">
-                {SOCIAL_LINKS.map((link) => {
-                  const IconComponent = iconMap[link.icon as keyof typeof iconMap] || Mail;
-                  
-                  return (
-                    <motion.a
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variants={buttonVariants}
-                      whileHover="hover"
-                      whileTap="tap"
-                      className="p-3 rounded-xl bg-surface/50 border border-white/5 text-foreground-muted
-                                 hover:text-accent hover:border-accent/30 hover:bg-accent/5 transition-all"
-                      aria-label={link.name}
-                    >
-                      <IconComponent className="w-5 h-5" />
-                    </motion.a>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Location */}
-            {/* <p className="text-muted text-sm">
-              📍 Based in {PERSONAL_INFO.location}
-            </p> */}
-          </motion.div>
-
-          {/* Right side - Contact form */}
-          <motion.div variants={fadeInUp} className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="relative">
-              {/* Glassmorphism card */}
-              <div className="relative p-8 rounded-2xl overflow-hidden">
-                {/* Background effects */}
-                <div className="absolute inset-0 bg-gradient-to-br from-surface/80 via-surface/60 to-surface/80 backdrop-blur-xl" />
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-indigo-500/5" />
-                <div className="absolute inset-[1px] rounded-2xl border border-white/10" />
-                
-                {/* Animated gradient border */}
-                <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                  <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0deg,rgba(168,85,247,0.1)_60deg,transparent_120deg)] animate-[spin_8s_linear_infinite]" />
-                </div>
-
-                {/* Form content */}
-                <div className="relative space-y-6">
-                  {/* Name & Email row */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-medium text-muted uppercase tracking-wider">Name</label>
-                      <div className={`relative transition-all duration-300 ${focusedField === 'name' ? 'scale-[1.02]' : ''}`}>
-                        <input
-                          type="text"
-                          value={formState.name}
-                          onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                          onFocus={() => setFocusedField('name')}
-                          onBlur={() => setFocusedField(null)}
-                          placeholder="Your name"
-                          required
-                          className="w-full px-4 py-3 bg-background/50 border border-white/10 rounded-lg text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:bg-background/80 transition-all"
-                        />
-                        {focusedField === 'name' && (
-                          <motion.div
-                            layoutId="focus-glow"
-                            className="absolute inset-0 -z-10 bg-accent/10 blur-xl rounded-lg"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-medium text-muted uppercase tracking-wider">Email</label>
-                      <div className={`relative transition-all duration-300 ${focusedField === 'email' ? 'scale-[1.02]' : ''}`}>
-                        <input
-                          type="email"
-                          value={formState.email}
-                          onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                          onFocus={() => setFocusedField('email')}
-                          onBlur={() => setFocusedField(null)}
-                          placeholder="your@email.com"
-                          required
-                          className="w-full px-4 py-3 bg-background/50 border border-white/10 rounded-lg text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:bg-background/80 transition-all"
-                        />
-                        {focusedField === 'email' && (
-                          <motion.div
-                            layoutId="focus-glow"
-                            className="absolute inset-0 -z-10 bg-accent/10 blur-xl rounded-lg"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                          />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Subject */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-medium text-muted uppercase tracking-wider">Subject</label>
-                    <div className={`relative transition-all duration-300 ${focusedField === 'subject' ? 'scale-[1.01]' : ''}`}>
-                      <input
-                        type="text"
-                        value={formState.subject}
-                        onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                        onFocus={() => setFocusedField('subject')}
-                        onBlur={() => setFocusedField(null)}
-                        placeholder="Collaboration, inquiry, or just saying hello"
-                        required
-                        className="w-full px-4 py-3 bg-background/50 border border-white/10 rounded-lg text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:bg-background/80 transition-all"
-                      />
-                      {focusedField === 'subject' && (
-                        <motion.div
-                          layoutId="focus-glow"
-                          className="absolute inset-0 -z-10 bg-accent/10 blur-xl rounded-lg"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                        />
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Message */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-medium text-muted uppercase tracking-wider">Message</label>
-                    <div className={`relative transition-all duration-300 ${focusedField === 'message' ? 'scale-[1.005]' : ''}`}>
-                      <textarea
-                        value={formState.message}
-                        onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                        onFocus={() => setFocusedField('message')}
-                        onBlur={() => setFocusedField(null)}
-                        placeholder="Share your thoughts, ideas, or project details..."
-                        required
-                        rows={5}
-                        className="w-full px-4 py-3 bg-background/50 border border-white/10 rounded-lg text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:bg-background/80 transition-all resize-none"
-                      />
-                      {focusedField === 'message' && (
-                        <motion.div
-                          layoutId="focus-glow"
-                          className="absolute inset-0 -z-10 bg-accent/10 blur-xl rounded-lg"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                        />
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Submit button */}
-                  <motion.button
-                    type="submit"
-                    disabled={isSubmitting || isSubmitted}
-                    className="relative w-full group overflow-hidden"
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
+          <SpotlightCard className="p-6 sm:p-7">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground-muted">Elsewhere</p>
+            <ul className="mt-3 divide-y divide-white/[0.06]">
+              {SOCIAL_LINKS.filter((l) => l.icon !== "mail").map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between py-3 text-foreground-muted transition-colors hover:text-foreground"
                   >
-                    {/* Button background */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-accent via-purple-500 to-indigo-500 rounded-lg" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-accent via-purple-500 to-indigo-500 rounded-lg blur-lg opacity-50 group-hover:opacity-70 transition-opacity" />
-                    
-                    {/* Shine effect */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                    </div>
-
-                    {/* Button content */}
-                    <div className="relative px-6 py-4 flex items-center justify-center gap-3 text-white font-semibold">
-                      {isSubmitted ? (
-                        <>
-                          <CheckCircle className="w-5 h-5" />
-                          Message Sent!
-                        </>
-                      ) : isSubmitting ? (
-                        <>
-                          <Loader2 className="w-5 h-5 animate-spin" />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          Send Message
-                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </>
-                      )}
-                    </div>
-                  </motion.button>
-                </div>
-              </div>
-            </form>
-          </motion.div>
+                    <span className="inline-flex items-center gap-3">
+                      <SocialIcon icon={link.icon} className="h-4 w-4" />
+                      {link.name}
+                    </span>
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-px group-hover:translate-x-px" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-foreground-muted">
+              <MapPin className="h-3.5 w-3.5" /> Based in {SITE.location}
+            </p>
+          </SpotlightCard>
         </motion.div>
 
-        {/* GitHub Activity Calendar */}
-        <GitHubActivity />
-      </div>
-    </SectionWrapper>
+        {/* Form */}
+        <motion.div variants={fadeUp} className="lg:col-span-3">
+          <SpotlightCard className="h-full p-6 sm:p-8">
+            <form onSubmit={handleSubmit} className="flex h-full flex-col gap-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field label="Name">
+                  <input type="text" value={form.name} onChange={update("name")} placeholder="Your name" required autoComplete="name" className={inputClasses} />
+                </Field>
+                <Field label="Email">
+                  <input type="email" value={form.email} onChange={update("email")} placeholder="you@company.com" required autoComplete="email" className={inputClasses} />
+                </Field>
+              </div>
+              <Field label="Subject">
+                <input type="text" value={form.subject} onChange={update("subject")} placeholder="Role, collaboration, or just saying hello" required className={inputClasses} />
+              </Field>
+              <Field label="Message" className="flex-1">
+                <textarea value={form.message} onChange={update("message")} placeholder="Tell me a bit about it..." required rows={5} className={`${inputClasses} h-full min-h-[140px] resize-none`} />
+              </Field>
+              <Button type="submit" disabled={sent} className="w-full sm:w-auto sm:self-end">
+                {sent ? (
+                  <>
+                    <CheckCircle2 className="h-4 w-4" /> Opening your mail app
+                  </>
+                ) : (
+                  <>
+                    Send message
+                    <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </>
+                )}
+              </Button>
+            </form>
+          </SpotlightCard>
+        </motion.div>
+      </motion.div>
+
+      <GitHubActivity />
+    </Section>
+  );
+}
+
+function Field({ label, children, className }: { label: string; children: React.ReactNode; className?: string }) {
+  return (
+    <label className={`flex flex-col gap-2 ${className ?? ""}`}>
+      <span className="text-xs font-medium text-foreground-muted">{label}</span>
+      {children}
+    </label>
   );
 }

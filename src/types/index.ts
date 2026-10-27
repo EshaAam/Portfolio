@@ -1,23 +1,33 @@
-// Navigation section type
+import type { IconType } from "react-icons";
+
+// Navigation section
 export interface NavSection {
   id: string;
   label: string;
-  href: string;
 }
 
-// Skill types
-export interface Skill {
+// Social link
+export interface SocialLink {
   name: string;
-  icon?: string;
+  url: string;
+  icon: "github" | "linkedin" | "mail";
 }
 
-export interface SkillCategory {
+// Education / experience timeline entry
+export interface TimelineItem {
+  id: string;
+  kind: "education" | "experience";
   title: string;
-  icon: string;
-  skills: Skill[];
+  organization: string;
+  period: string;
+  location: string;
+  status?: string;
+  logo?: string;
+  points?: string[];
+  tags?: string[];
 }
 
-// Project types
+// Project
 export interface ProjectHighlight {
   label: string;
   value: string;
@@ -26,40 +36,45 @@ export interface ProjectHighlight {
 export interface Project {
   id: string;
   title: string;
-  subtitle: string;
-  problem: string;
-  solution: string;
-  architecture?: string;
-  challenges: string[];
+  tagline: string;
+  description: string;
+  features: string[];
   technologies: string[];
   highlights: ProjectHighlight[];
   githubUrl?: string;
   liveUrl?: string;
   image?: string;
-  featured?: boolean;
+  /** Accent color used for glows and badges, as an RGB triplet ("16 185 129") */
+  accent: string;
 }
 
-// Lab/practical work types
-export interface Lab {
+// Skills
+export interface Skill {
+  name: string;
+  icon?: IconType;
+  color?: string;
+}
+
+export interface SkillCategory {
   id: string;
   title: string;
   description: string;
-  category: "security" | "networking" | "testing" | "devops" | "research";
-  skills: string[];
-  icon: string;
-  githubUrl?: string;
-  isDemo?: boolean;
+  skills: Skill[];
 }
 
-// Social link types
-export interface SocialLink {
-  name: string;
-  url: string;
-  icon: string;
-}
-
-// About section bullet points
-export interface AboutPoint {
-  icon: string;
-  text: string;
+// Research publication
+export interface Publication {
+  id: string;
+  title: string;
+  shortTitle: string;
+  venue: string;
+  venueDetail: string;
+  year: string;
+  role: string;
+  authors: string[];
+  summary: string;
+  contributions: string[];
+  stats: ProjectHighlight[];
+  tags: string[];
+  links: { label: string; url: string }[];
 }

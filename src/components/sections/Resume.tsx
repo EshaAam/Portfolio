@@ -1,240 +1,241 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Download, Eye, EyeOff, Mail, Phone, Github, Linkedin } from "lucide-react";
-import { SectionWrapper, SectionHeader } from "@/components/ui/SectionWrapper";
-import { SpaceButton } from "@/components/ui/SpaceButton";
-import { fadeInUp } from "@/lib/motion";
-import { PERSONAL_INFO } from "@/lib/constants";
+import { useState, type ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ChevronDown,
+  Download,
+  ExternalLink,
+  Github,
+  Globe,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
+import { Section, SectionHeading } from "@/components/ui/Section";
+import { Reveal } from "@/components/ui/Reveal";
+import { Button, LinkButton } from "@/components/ui/Button";
+import { EASE_OUT } from "@/lib/motion";
+import { SITE, SOCIAL_LINKS } from "@/data/site";
+import { ACHIEVEMENTS, EDUCATION, EXPERIENCE } from "@/data/journey";
+import { RESUME_PROJECTS, RESUME_SKILLS } from "@/data/resume";
+import { PUBLICATIONS } from "@/data/research";
 
-/**
- * Resume section with toggleable HTML resume view
- * Features a "Show Resume" button that reveals the full resume
- * Includes download option for PDF version
- */
 export function Resume() {
-  const [showResume, setShowResume] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <SectionWrapper id="resume" className="flex items-center">
-      <div className="max-w-6xl mx-auto w-full py-20">
-        <SectionHeader
-          title="Resume"
-          subtitle="View my professional experience and qualifications"
-        />
+    <Section id="resume">
+      <SectionHeading
+        eyebrow="Resume"
+        title="Curriculum vitae"
+        description="The short version of my education, experience, projects and research. Download the PDF for the one-page copy."
+      />
 
-        {/* Action Buttons */}
-        <motion.div
-          {...fadeInUp}
-          className="flex flex-wrap items-center justify-center gap-4 mb-8"
-        >
-          <SpaceButton onClick={() => setShowResume(!showResume)}>
-            {showResume ? (
-              <>
-                <EyeOff className="w-4 h-4" />
-                Hide Resume
-              </>
-            ) : (
-              <>
-                <Eye className="w-4 h-4" />
-                Show Resume
-              </>
-            )}
-          </SpaceButton>
-
-          <a
-            href={PERSONAL_INFO.resumeUrl}
-            download
-            className="inline-flex items-center justify-center gap-2 border-2 border-purple-400 px-6 py-3 text-purple-400 text-sm font-semibold rounded-lg bg-transparent hover:bg-purple-400 hover:text-black transition-all duration-300 shadow-[0_0_20px_rgba(217,176,255,0.3)] hover:shadow-[0_0_30px_rgba(217,176,255,0.5)]"
-          >
-            <Download className="w-4 h-4" />
-            Download PDF
-          </a>
-        </motion.div>
-
-        {/* Resume Content - Toggleable */}
-        <AnimatePresence>
-          {showResume && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="overflow-hidden"
-            >
-              <div className="bg-[#fafafa] text-gray-800 rounded-xl shadow-2xl max-w-4xl mx-auto overflow-hidden">
-                {/* Resume Header */}
-                <div className="bg-gradient-to-r from-slate-800 to-slate-700 text-white p-8 text-center">
-                  <h1 className="text-4xl font-bold mb-2">Ekramul Esham</h1>
-                  <p className="text-gray-300 mb-4">Dhaka, Bangladesh</p>
-                  
-                  <div className="flex flex-wrap justify-center gap-4 text-sm">
-                    <a href="mailto:ekramul.esham@gmail.com" className="flex items-center gap-2 hover:text-purple-300 transition-colors">
-                      <Mail className="w-4 h-4" />
-                      ekramul.esham@gmail.com
-                    </a>
-                    <span className="flex items-center gap-2">
-                      <Phone className="w-4 h-4" />
-                      +880 1638 802972
-                    </span>
-                    <a href="https://www.linkedin.com/in/ekramul-esham-293a2829b/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-purple-300 transition-colors">
-                      <Linkedin className="w-4 h-4" />
-                      LinkedIn
-                    </a>
-                    <a href="https://github.com/EshaAam" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-purple-300 transition-colors">
-                      <Github className="w-4 h-4" />
-                      GitHub
-                    </a>
-                  </div>
-                </div>
-
-                {/* Resume Body */}
-                <div className="p-8 space-y-6">
-                  {/* Skills */}
-                  <section>
-                    <h2 className="text-lg font-bold text-slate-800 border-b-2 border-slate-300 pb-2 mb-4">
-                      Skills
-                    </h2>
-                    <div className="grid gap-2 text-sm">
-                      <div className="flex">
-                        <span className="font-semibold text-slate-700 w-32 shrink-0">Languages</span>
-                        <span className="text-gray-600">C, C++, Java, JavaScript, TypeScript, PHP</span>
-                      </div>
-                      <div className="flex">
-                        <span className="font-semibold text-slate-700 w-32 shrink-0">Frameworks</span>
-                        <span className="text-gray-600">React.js, Next.js, Node.js, Express.js, Laravel, Tailwind CSS, Bootstrap</span>
-                      </div>
-                      <div className="flex">
-                        <span className="font-semibold text-slate-700 w-32 shrink-0">Databases</span>
-                        <span className="text-gray-600">MySQL, MongoDB, PostgreSQL, Firebase</span>
-                      </div>
-                      <div className="flex">
-                        <span className="font-semibold text-slate-700 w-32 shrink-0">Cloud</span>
-                        <span className="text-gray-600">Microsoft Azure</span>
-                      </div>
-                      <div className="flex">
-                        <span className="font-semibold text-slate-700 w-32 shrink-0">Tools</span>
-                        <span className="text-gray-600">Git, GitHub, VS Code, Visual Studio, IntelliJ IDEA</span>
-                      </div>
-                      <div className="flex">
-                        <span className="font-semibold text-slate-700 w-32 shrink-0">Concepts</span>
-                        <span className="text-gray-600">OOP, SOLID Principles, Design Patterns, REST APIs, Web Frameworks</span>
-                      </div>
-                      <div className="flex">
-                        <span className="font-semibold text-slate-700 w-32 shrink-0">Data Analysis</span>
-                        <span className="text-gray-600">Pandas, NumPy, Model Evaluation</span>
-                      </div>
-                    </div>
-                  </section>
-
-                  {/* Projects */}
-                  <section>
-                    <h2 className="text-lg font-bold text-slate-800 border-b-2 border-slate-300 pb-2 mb-4">
-                      Projects
-                    </h2>
-                    
-                    <div className="space-y-5">
-                      {/* E-Blog */}
-                      <div>
-                        <div className="flex justify-between items-start mb-1">
-                          <h3 className="font-semibold text-slate-800">E-Blog - Personal Blogging Platform</h3>
-                          <a href="https://github.com/EshaAam" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">GitHub</a>
-                        </div>
-                        <p className="text-sm text-blue-600 italic mb-2">MongoDB, Express.js, React.js, Node.js, Clerk Auth, Tailwind CSS</p>
-                        <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
-                          <li>Built a full-stack blogging platform with user authentication, CRUD operations, and favorite management.</li>
-                          <li>Implemented Clerk authentication (email, passkey, Google) with protected user and admin routes.</li>
-                          <li>Developed an admin dashboard for role-based content moderation and management.</li>
-                        </ul>
-                      </div>
-
-                      {/* VibeShopping */}
-                      <div>
-                        <div className="flex justify-between items-start mb-1">
-                          <h3 className="font-semibold text-slate-800">VibeShopping - E-Commerce Platform <span className="text-gray-500 font-normal">(In Progress)</span></h3>
-                          <a href="https://github.com/EshaAam" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">GitHub</a>
-                        </div>
-                        <p className="text-sm text-blue-600 italic mb-2">Next.js, TypeScript, PostgreSQL, Prisma, ShadCN UI</p>
-                        <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
-                          <li>Developing a modern e-commerce platform with product listings, cart management, and admin controls.</li>
-                          <li>Implementing search, filtering, authentication, and secure payment workflows.</li>
-                          <li>Built with Next.js 15 and ShadCN UI; continuously deployed on Vercel.</li>
-                        </ul>
-                      </div>
-
-                      {/* GadgetMart */}
-                      <div>
-                        <div className="flex justify-between items-start mb-1">
-                          <h3 className="font-semibold text-slate-800">GadgetMart - Multi-Vendor E-Commerce Platform <span className="text-gray-500 font-normal">(Team Project)</span></h3>
-                          <a href="https://github.com/EshaAam" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">GitHub</a>
-                        </div>
-                        <p className="text-sm text-blue-600 italic mb-2">MongoDB, Express.js, React.js, Node.js, Tailwind CSS</p>
-                        <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
-                          <li>Built a multi-vendor marketplace allowing verified shops to list products and manage orders.</li>
-                          <li>Enabled secure browsing, searching, and purchasing for customers.</li>
-                          <li>Implemented role-based authentication and password strength validation.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </section>
-
-                  {/* Education */}
-                  <section>
-                    <h2 className="text-lg font-bold text-slate-800 border-b-2 border-slate-300 pb-2 mb-4">
-                      Education
-                    </h2>
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <div>
-                          <h3 className="font-semibold text-slate-800">Islamic University of Technology (IUT), OIC</h3>
-                          <p className="text-gray-600 text-sm">Bachelor of Science in Software Engineering</p>
-                        </div>
-                        <div className="text-right text-sm">
-                          <p className="text-blue-600">Gazipur, Bangladesh</p>
-                          <p className="text-gray-500">Aug 2022 – Present</p>
-                        </div>
-                      </div>
-                      <div className="flex justify-between">
-                        <div>
-                          <h3 className="font-semibold text-slate-800">Rajuk Uttara Model College</h3>
-                          <p className="text-gray-600 text-sm">Higher Secondary Certificate (HSC)</p>
-                        </div>
-                        <div className="text-right text-sm">
-                          <p className="text-blue-600">Dhaka, Bangladesh</p>
-                          <p className="text-gray-500">2019 – 2021</p>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-
-                  {/* Extra-Curricular Activities */}
-                  <section>
-                    <h2 className="text-lg font-bold text-slate-800 border-b-2 border-slate-300 pb-2 mb-4">
-                      Extra-Curricular Activities
-                    </h2>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
-                      <li><span className="font-semibold text-slate-700">CodeRush Fest 2024:</span> Managed and coordinated a university-level programming contest.</li>
-                      <li><span className="font-semibold text-slate-700">Problem Solving:</span> Solved 200+ problems on Codeforces and LeetCode.</li>
-                      <li><span className="font-semibold text-slate-700">Sports:</span> Participated in Football, Cricket, and Badminton; Champion at IUT Futsal Tournament.</li>
-                    </ul>
-                  </section>
-
-                  {/* Certifications */}
-                  <section>
-                    <h2 className="text-lg font-bold text-slate-800 border-b-2 border-slate-300 pb-2 mb-4">
-                      Certifications
-                    </h2>
-                    <ul className="list-disc list-inside text-gray-600 text-sm">
-                      <li><span className="font-semibold text-slate-700">Next.js: Building Shopping Platform</span> — Udemy (2024)</li>
-                    </ul>
-                  </section>
-                </div>
+      <Reveal className="mx-auto max-w-4xl">
+        <div className="overflow-hidden rounded-3xl border border-white/[0.08] bg-[#0c0c12]/90 shadow-[0_40px_120px_-40px_rgba(124,58,237,0.35)] backdrop-blur-xl">
+          {/* Header */}
+          <div className="relative overflow-hidden border-b border-white/[0.06] px-6 py-8 sm:px-10 sm:py-10">
+            <div aria-hidden className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/15 blur-[80px]" />
+            <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h3 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">{SITE.fullName}</h3>
+                <p className="mt-1 text-foreground-muted">{SITE.role}</p>
+                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-foreground-muted">
+                  <ContactItem icon={<MapPin className="h-3.5 w-3.5" />}>{SITE.location}</ContactItem>
+                  <ContactItem icon={<Mail className="h-3.5 w-3.5" />} href={`mailto:${SITE.email}`}>
+                    {SITE.email}
+                  </ContactItem>
+                  <ContactItem icon={<Phone className="h-3.5 w-3.5" />} href={`tel:${SITE.phone}`}>
+                    {SITE.phoneDisplay}
+                  </ContactItem>
+                  <ContactItem icon={<Linkedin className="h-3.5 w-3.5" />} href={SOCIAL_LINKS[1].url}>
+                    ekramul-esham
+                  </ContactItem>
+                  <ContactItem icon={<Github className="h-3.5 w-3.5" />} href={SOCIAL_LINKS[0].url}>
+                    EshaAam
+                  </ContactItem>
+                  <ContactItem icon={<Globe className="h-3.5 w-3.5" />} href={SITE.url}>
+                    ekramulesham.vercel.app
+                  </ContactItem>
+                </ul>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <div className="flex flex-wrap gap-2 md:flex-col md:items-stretch">
+                <LinkButton href={SITE.resumeUrl} download="Ekramul_Esham_CV.pdf">
+                  <Download className="h-4 w-4" />
+                  Download PDF
+                </LinkButton>
+                <LinkButton href={SITE.resumeUrl} variant="secondary" target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4" />
+                  Open PDF
+                </LinkButton>
+              </div>
+            </div>
+          </div>
+
+          {/* Always-visible summary */}
+          <div className="grid gap-8 px-6 py-8 sm:px-10 md:grid-cols-2">
+            <ResumeBlock title="Education">
+              {EDUCATION.map((e) => (
+                <Entry key={e.id} title={e.organization} meta={e.period} subtitle={e.title} note={e.id === "iut" ? "First Class" : undefined} />
+              ))}
+            </ResumeBlock>
+            <ResumeBlock title="Experience">
+              {EXPERIENCE.map((e) => (
+                <Entry key={e.id} title={e.title} meta={e.period} subtitle={e.organization} />
+              ))}
+            </ResumeBlock>
+          </div>
+
+          {/* Expandable detail */}
+          <AnimatePresence initial={false}>
+            {expanded && (
+              <motion.div
+                key="detail"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.5, ease: EASE_OUT }}
+                className="overflow-hidden"
+              >
+                <div className="space-y-10 border-t border-white/[0.06] px-6 py-8 sm:px-10">
+                  <ResumeBlock title="Experience details">
+                    <ul className="space-y-2">
+                      {EXPERIENCE[0].points?.map((p) => (
+                        <Bullet key={p}>{p}</Bullet>
+                      ))}
+                    </ul>
+                  </ResumeBlock>
+
+                  <ResumeBlock title="Projects">
+                    <div className="space-y-6">
+                      {RESUME_PROJECTS.map((p) => (
+                        <div key={p.name}>
+                          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                            <a href={p.githubUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground hover:text-accent-light">
+                              {p.name}
+                            </a>
+                            <span className="text-sm text-foreground-muted">· {p.subtitle}</span>
+                            {p.liveUrl && (
+                              <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-emerald-300 hover:text-emerald-200">
+                                Live demo <ExternalLink className="h-3 w-3" />
+                              </a>
+                            )}
+                          </div>
+                          <ul className="mt-2 space-y-1.5">
+                            {p.points.map((pt) => (
+                              <Bullet key={pt}>{pt}</Bullet>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </ResumeBlock>
+
+                  <ResumeBlock title="Skills">
+                    <dl className="divide-y divide-white/[0.05]">
+                      {RESUME_SKILLS.map((s) => (
+                        <div key={s.label} className="grid gap-1 py-2.5 sm:grid-cols-[150px_1fr] sm:gap-4">
+                          <dt className="text-sm font-medium text-foreground">{s.label}</dt>
+                          <dd className="text-sm text-foreground-muted">{s.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </ResumeBlock>
+
+                  <ResumeBlock title="Publications">
+                    <ul className="space-y-3">
+                      {PUBLICATIONS.map((p) => (
+                        <Bullet key={p.id}>
+                          <span className="text-foreground">{p.title}</span>, {p.venue}
+                          {p.id === "benhallueval" ? " (Main Conference). Co-first author." : `, ${p.venueDetail}.`}{" "}
+                          <a href={p.links[0].url} target="_blank" rel="noopener noreferrer" className="text-accent-light hover:underline">
+                            {p.links[0].label}
+                          </a>
+                        </Bullet>
+                      ))}
+                    </ul>
+                  </ResumeBlock>
+
+                  <ResumeBlock title="Achievements">
+                    <ul className="space-y-2">
+                      {ACHIEVEMENTS.slice(1).map((a) => (
+                        <Bullet key={a}>{a}</Bullet>
+                      ))}
+                    </ul>
+                  </ResumeBlock>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="flex justify-center border-t border-white/[0.06] px-6 py-4">
+            <Button variant="ghost" size="sm" onClick={() => setExpanded((v) => !v)} aria-expanded={expanded}>
+              {expanded ? "Show less" : "Show full resume"}
+              <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${expanded ? "rotate-180" : ""}`} />
+            </Button>
+          </div>
+        </div>
+      </Reveal>
+    </Section>
+  );
+}
+
+function ContactItem({ icon, href, children }: { icon: ReactNode; href?: string; children: ReactNode }) {
+  const content = (
+    <span className="inline-flex items-center gap-1.5">
+      {icon}
+      {children}
+    </span>
+  );
+  return (
+    <li>
+      {href ? (
+        <a
+          href={href}
+          target={href.startsWith("http") ? "_blank" : undefined}
+          rel="noopener noreferrer"
+          className="transition-colors hover:text-foreground"
+        >
+          {content}
+        </a>
+      ) : (
+        content
+      )}
+    </li>
+  );
+}
+
+function ResumeBlock({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div>
+      <h4 className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-accent-light">{title}</h4>
+      <div className="space-y-4">{children}</div>
+    </div>
+  );
+}
+
+function Entry({ title, subtitle, meta, note }: { title: string; subtitle: string; meta: string; note?: string }) {
+  return (
+    <div>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+        <p className="font-medium text-foreground">{title}</p>
+        <p className="font-mono text-xs text-foreground-muted">{meta}</p>
       </div>
-    </SectionWrapper>
+      <p className="mt-0.5 text-sm text-foreground-muted">
+        {subtitle}
+        {note && <span className="text-foreground"> · {note}</span>}
+      </p>
+    </div>
+  );
+}
+
+function Bullet({ children }: { children: ReactNode }) {
+  return (
+    <li className="flex gap-3 text-sm leading-relaxed text-foreground-muted">
+      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+      <span>{children}</span>
+    </li>
   );
 }

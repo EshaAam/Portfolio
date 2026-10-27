@@ -1,0 +1,130 @@
+import type { Project } from "@/types";
+
+// Ordered by priority: the first project is shown first in the showcase
+export const PROJECTS: Project[] = [
+  {
+    id: "interviewiq",
+    title: "InterviewIQ",
+    tagline: "AI-Powered Technical Interview Platform",
+    description:
+      "Candidates upload a résumé and answer interview questions generated from the skills on it. Every answer is graded twice, by a deterministic concept check and by an LLM judge, and disagreements go to a recruiter instead of being averaged away.",
+    features: [
+      "Asynchronous, idempotent Celery pipeline for résumé parsing, JD gap analysis, question generation and reports",
+      "Dual-pass grading: embedding similarity + LLM-as-a-Judge, with a recruiter review queue for disagreements",
+      "Hybrid RAG (pgvector + full-text search, RRF) that grounds every question in a cited source",
+      "Resilient LLM layer with caching, circuit breakers, retries, token budgets and a cost ledger",
+    ],
+    technologies: [
+      "FastAPI",
+      "Next.js",
+      "PostgreSQL",
+      "pgvector",
+      "Redis",
+      "Celery",
+      "Alembic",
+      "Docker",
+      "GitHub Actions",
+    ],
+    highlights: [
+      { label: "Grading", value: "Dual-pass" },
+      { label: "Retrieval", value: "Hybrid RAG" },
+      { label: "Jobs", value: "Celery" },
+      { label: "CI", value: "Actions" },
+    ],
+    githubUrl: "https://github.com/EshaAam/InterviewIQ",
+    liveUrl: "https://interview-iq-blush-phi.vercel.app/",
+    image: "/images/projects/interviewiq.jpg",
+    accent: "45 212 191",
+  },
+  {
+    id: "vibe-shopping",
+    title: "VibeShopping",
+    tagline: "Full-Stack E-Commerce Platform",
+    description:
+      "A production-grade storefront with a stock-aware AI shopping assistant grounded in the live catalog, Stripe payments verified by webhook, and an admin console with sales analytics, all backed by a database that defends its own invariants.",
+    features: [
+      "Auth.js authentication with role-based access enforced on every server action",
+      "Stock-aware AI assistant with response caching, key-pool failover and a graceful degraded mode",
+      "Multi-provider checkout with server-side repricing, race-safe stock reservation and idempotent webhooks",
+      "Admin dashboard with sales analytics, optimized with React Server Components and granular revalidation",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "Auth.js",
+      "Stripe",
+      "Gemini",
+      "Tailwind CSS",
+    ],
+    highlights: [
+      { label: "Framework", value: "Next.js 15" },
+      { label: "Database", value: "PostgreSQL" },
+      { label: "Payments", value: "Stripe" },
+      { label: "Assistant", value: "AI" },
+    ],
+    githubUrl: "https://github.com/EshaAam/VibeShopping",
+    liveUrl: "https://vibe-shopping-one.vercel.app/",
+    image: "/images/projects/vibeshopping.png",
+    accent: "168 85 247",
+  },
+  {
+    id: "wander-bangladesh",
+    title: "Wander Bangladesh",
+    tagline: "Interactive Travel Experience Platform",
+    description:
+      "A cinematic travel platform showcasing Bangladesh's destinations through immersive, scroll-driven storytelling, with a dark editorial look, atmospheric transitions and fluid motion.",
+    features: [
+      "Responsive, immersive UX built from reusable components and dynamic routing",
+      "Smooth scroll-based interactions and perspective transforms",
+      "Optimized media rendering with a category-based image fallback system",
+    ],
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Vercel",
+    ],
+    highlights: [
+      { label: "Framework", value: "Next.js 16" },
+      { label: "UI", value: "React 19" },
+      { label: "Motion", value: "Scroll-driven" },
+      { label: "Deploy", value: "Vercel" },
+    ],
+    githubUrl: "https://github.com/EshaAam/wander-bangladesh",
+    liveUrl: "https://wander-bangladesh.vercel.app/",
+    image: "/images/projects/wander-bangladesh.png",
+    accent: "251 146 60",
+  },
+  {
+    id: "e-blog",
+    title: "E-Blog",
+    tagline: "Full-Stack Blogging Platform",
+    description:
+      "A MERN blogging platform where writers publish and manage posts, readers browse with infinite scroll, and admins moderate content through a role-based dashboard.",
+    features: [
+      "Clerk authentication (email, passkey, Google) with protected user and admin routes",
+      "RESTful APIs with full CRUD for posts and favorites",
+      "React infinite scroll and role-based admin content management",
+    ],
+    technologies: [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Clerk",
+      "Tailwind CSS",
+    ],
+    highlights: [
+      { label: "Stack", value: "MERN" },
+      { label: "Auth", value: "Clerk" },
+      { label: "Roles", value: "Admin/User" },
+      { label: "API", value: "REST" },
+    ],
+    githubUrl: "https://github.com/EshaAam/Full-Stack-Blog-App",
+    accent: "99 102 241",
+  },
+];

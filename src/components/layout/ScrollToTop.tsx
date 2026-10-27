@@ -1,45 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ArrowUp } from "lucide-react";
-import { buttonVariants } from "@/lib/motion";
 
-/**
- * Scroll to top button
- * Appears after scrolling down
- */
 export function ScrollToTop() {
+  const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.scrollY > 500);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  useMotionValueEvent(scrollY, "change", (y) => setVisible(y > 700));
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          variants={buttonVariants}
-          whileHover="hover"
-          whileTap="tap"
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-30 p-3 rounded-full bg-accent text-white shadow-glow"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.25 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-5 right-5 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#0e0e14]/80 text-foreground-muted backdrop-blur-xl transition-colors hover:border-white/20 hover:text-foreground sm:bottom-8 sm:right-8"
           aria-label="Scroll to top"
         >
-          <ArrowUp className="w-5 h-5" />
+          <ArrowUp className="h-4 w-4" />
         </motion.button>
       )}
     </AnimatePresence>

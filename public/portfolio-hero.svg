@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" width="600" height="460" role="img" aria-label="Developer coding at a desk with a cup of coffee">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity=".28"/>
+      <stop offset=".6" stop-color="#6366f1" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="screenGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#a855f7" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c084fc"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2d66"/>
+      <stop offset="1" stop-color="#1c1631"/>
+    </linearGradient>
+    <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#231c3d"/>
+      <stop offset="1" stop-color="#14101f"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#140d2b"/>
+      <stop offset="1" stop-color="#1e1245"/>
+    </linearGradient>
+    <linearGradient id="hoodie" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9f6bff"/>
+      <stop offset="1" stop-color="#4c1d95"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3d2c6b"/>
+      <stop offset="1" stop-color="#150f26"/>
+    </linearGradient>
+    <linearGradient id="chair" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#352a5e"/>
+      <stop offset="1" stop-color="#17122a"/>
+    </linearGradient>
+    <linearGradient id="mug" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f5f3ff"/>
+      <stop offset="1" stop-color="#c4b5fd"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#241b45" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#120e22" stop-opacity=".9"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#c084fc"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .type  { transform-box: fill-box; transform-origin: left center; animation: type 7s ease-in-out infinite; }
+    .d1{animation-delay:.3s}.d2{animation-delay:.6s}.d3{animation-delay:.9s}.d4{animation-delay:1.2s}
+    .d5{animation-delay:1.5s}.d6{animation-delay:1.8s}.d7{animation-delay:2.1s}.d8{animation-delay:2.4s}
+    @keyframes type { 0%{transform:scaleX(0)} 14%,82%{transform:scaleX(1)} 96%,100%{transform:scaleX(0)} }
+    .blink { animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50%{opacity:0} }
+    .pulse { animation: pulse 4s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:.75} 50%{opacity:1} }
+    .float  { animation: float 5s ease-in-out infinite; }
+    .float2 { animation: float 6s ease-in-out -2s infinite; }
+    .float3 { animation: float 5.5s ease-in-out -3.5s infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+    .steam { opacity:0; animation: steam 3s ease-in-out infinite; }
+    .s2{animation-delay:1s}.s3{animation-delay:2s}
+    @keyframes steam { 0%{opacity:0;transform:translateY(4px)} 35%{opacity:.75} 100%{opacity:0;transform:translateY(-14px)} }
+    .tw { animation: tw 3s ease-in-out infinite; }
+    .t2{animation-delay:1s}.t3{animation-delay:2s}
+    @keyframes tw { 0%,100%{opacity:.25} 50%{opacity:1} }
+    .tap { animation: tap .45s ease-in-out infinite alternate; }
+    @keyframes tap { to{transform:translateY(-1.6px)} }
+    .sway { transform-box: fill-box; transform-origin: bottom center; animation: sway 5s ease-in-out infinite; }
+    .sw2 { animation-delay: -2.5s; }
+    @keyframes sway { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .steam{opacity:.5} }
+  </style>
+
+  <!-- ambient glow + floor -->
+  <ellipse cx="300" cy="230" rx="290" ry="215" fill="url(#glow)"/>
+  <ellipse cx="300" cy="414" rx="235" ry="13" fill="#000" opacity=".45"/>
+  <ellipse cx="300" cy="412" rx="200" ry="4" fill="#8b5cf6" opacity=".18"/>
+
+  <!-- constellation -->
+  <g stroke="#7c3aed" stroke-opacity=".35" stroke-width="1">
+    <line x1="34" y1="70" x2="78" y2="50"/><line x1="78" y1="50" x2="104" y2="84"/>
+    <line x1="530" y1="168" x2="568" y2="200"/><line x1="568" y1="200" x2="556" y2="246"/>
+  </g>
+  <g fill="#a78bfa">
+    <circle class="tw"    cx="34"  cy="70"  r="2"/>
+    <circle class="tw t2" cx="78"  cy="50"  r="2.4"/>
+    <circle class="tw t3" cx="104" cy="84"  r="1.8"/>
+    <circle class="tw t2" cx="530" cy="168" r="2"/>
+    <circle class="tw"    cx="568" cy="200" r="2.4"/>
+    <circle class="tw t3" cx="556" cy="246" r="1.8"/>
+    <circle class="tw t3" cx="300" cy="30"  r="1.6"/>
+    <circle class="tw"    cx="20"  cy="330" r="1.6"/>
+    <circle class="tw t2" cx="582" cy="350" r="1.6"/>
+  </g>
+
+  <!-- screen glow -->
+  <ellipse class="pulse" cx="250" cy="185" rx="200" ry="135" fill="url(#screenGlow)"/>
+
+  <!-- desk -->
+  <rect x="94"  y="312" width="12" height="98" rx="3" fill="#1a1530"/>
+  <rect x="494" y="312" width="12" height="98" rx="3" fill="#1a1530"/>
+  <rect x="70" y="300" width="460" height="15" rx="6" fill="url(#desk)"/>
+  <line x1="78" y1="301" x2="522" y2="301" stroke="#a78bfa" stroke-opacity=".55" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- monitor -->
+  <path d="M238 266 h24 l4 28 h-32 z" fill="#221b3a"/>
+  <rect x="204" y="292" width="92" height="8" rx="4" fill="#2c2350"/>
+  <line x1="210" y1="293" x2="290" y2="293" stroke="#a78bfa" stroke-opacity=".4"/>
+  <rect x="120" y="100" width="260" height="168" rx="14" fill="url(#bezel)" stroke="#4c3d7a" stroke-width="1.5"/>
+  <rect x="130" y="110" width="240" height="148" rx="8" fill="url(#screen)"/>
+
+  <circle cx="142" cy="121" r="3.2" fill="#f472b6"/>
+  <circle cx="153" cy="121" r="3.2" fill="#c084fc"/>
+  <circle cx="164" cy="121" r="3.2" fill="#818cf8"/>
+  <text x="250" y="124" font-family="ui-monospace, Menlo, monospace" font-size="8" fill="#8b7fb8" text-anchor="middle">portfolio.tsx</text>
+  <line x1="130" y1="131" x2="370" y2="131" stroke="#2a2050"/>
+
+  <g font-family="ui-monospace, Menlo, monospace" font-size="7" fill="#4b3f73" text-anchor="end">
+    <text x="146" y="149">1</text><text x="146" y="163">2</text><text x="146" y="177">3</text><text x="146" y="191">4</text>
+    <text x="146" y="205">5</text><text x="146" y="219">6</text><text x="146" y="233">7</text><text x="146" y="247">8</text>
+  </g>
+  <rect class="type"    x="154" y="143" width="38"  height="6" rx="3" fill="#f472b6"/>
+  <rect class="type d1" x="196" y="143" width="62"  height="6" rx="3" fill="#c084fc"/>
+  <rect class="type d2" x="166" y="157" width="92"  height="6" rx="3" fill="#818cf8"/>
+  <rect class="type d3" x="178" y="171" width="52"  height="6" rx="3" fill="#5eead4"/>
+  <rect class="type d3" x="234" y="171" width="48"  height="6" rx="3" fill="#c084fc"/>
+  <rect class="type d4" x="178" y="185" width="118" height="6" rx="3" fill="#a78bfa"/>
+  <rect class="type d5" x="190" y="199" width="68"  height="6" rx="3" fill="#f9a8d4"/>
+  <rect class="type d5" x="262" y="199" width="40"  height="6" rx="3" fill="#818cf8"/>
+  <rect class="type d6" x="178" y="213" width="84"  height="6" rx="3" fill="#5eead4"/>
+  <rect class="type d7" x="166" y="227" width="50"  height="6" rx="3" fill="#818cf8"/>
+  <rect class="type d8" x="154" y="241" width="26"  height="6" rx="3" fill="#f472b6"/>
+  <rect class="blink" x="184" y="239" width="2" height="10" fill="#ede9fe"/>
+
+  <g fill="#a78bfa" opacity=".22">
+    <rect x="350" y="140" width="12" height="2"/><rect x="352" y="145" width="9" height="2"/>
+    <rect x="352" y="150" width="11" height="2"/><rect x="350" y="155" width="7" height="2"/>
+    <rect x="352" y="160" width="12" height="2"/><rect x="354" y="165" width="8" height="2"/>
+  </g>
+  <rect x="348" y="138" width="18" height="30" rx="2" fill="#a78bfa" opacity=".06"/>
+  <path d="M130 118 Q130 110 138 110 H214 L150 258 H138 Q130 258 130 250 Z" fill="#fff" opacity=".035"/>
+
+  <!-- keyboard -->
+  <rect x="210" y="292" width="102" height="8" rx="3" fill="#2a2247" stroke="#5b4a91" stroke-width=".8"/>
+  <line x1="216" y1="293.5" x2="306" y2="293.5" stroke="#c084fc" stroke-opacity=".55"/>
+
+  <!-- coffee -->
+  <ellipse cx="99" cy="300" rx="24" ry="3.2" fill="#c4b5fd" opacity=".35"/>
+  <path d="M112 278 q12 0 12 9 q0 9 -12 9" fill="none" stroke="#ddd6fe" stroke-width="4"/>
+  <rect x="84" y="270" width="29" height="30" rx="5" fill="url(#mug)"/>
+  <rect x="84" y="281" width="29" height="5" fill="#a855f7"/>
+  <ellipse cx="98.5" cy="270.5" rx="14.5" ry="3" fill="#3b2416"/>
+  <g fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round">
+    <path class="steam"    d="M92 262 q-4 -6 0 -12 q4 -6 0 -12"/>
+    <path class="steam s2" d="M99 262 q-4 -6 0 -12 q4 -6 0 -12"/>
+    <path class="steam s3" d="M106 262 q-4 -6 0 -12 q4 -6 0 -12"/>
+  </g>
+
+  <!-- plant -->
+  <g>
+    <path class="sway"     d="M505 280 C492 262 488 246 494 230 C504 246 508 262 505 280 Z" fill="#14b8a6"/>
+    <path class="sway sw2" d="M506 280 C512 258 524 248 536 244 C532 262 520 274 506 280 Z" fill="#2dd4bf"/>
+    <path class="sway"     d="M504 280 C496 270 482 266 472 266 C480 278 492 282 504 280 Z" fill="#0d9488"/>
+    <path d="M488 278 H522 L517 300 H493 Z" fill="#2c2350" stroke="#7c3aed" stroke-opacity=".5"/>
+  </g>
+
+  <!-- person (back view) -->
+  <g class="tap">
+    <path d="M364 214 Q344 240 337 262 L305 289" fill="none" stroke="#7c3aed" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M362 216 Q345 240 339 258" fill="none" stroke="#c4a5ff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/>
+    <ellipse cx="301" cy="291" rx="9" ry="5.5" fill="#f2c4a0"/>
+  </g>
+  <path d="M352 266 C349 226 362 202 392 195 H428 C456 202 470 226 467 266 Z" fill="url(#hoodie)"/>
+  <path d="M356 250 C354 226 364 206 390 198" fill="none" stroke="#d8c4ff" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+  <path d="M384 197 Q409 216 434 197 Q430 186 409 186 Q388 186 384 197 Z" fill="#5b21b6"/>
+  <rect x="400" y="176" width="18" height="16" rx="4" fill="#d9a27f"/>
+  <path d="M384 148 Q377 168 391 182 L398 180 Q387 166 389 148 Z" fill="#f2c4a0"/>
+  <circle cx="409" cy="155" r="28" fill="url(#hair)"/>
+  <path d="M396 133 Q410 128 424 136 M392 145 Q408 138 428 148" fill="none" stroke="#4a3880" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M390 134 A28 28 0 0 0 383 166" fill="none" stroke="#c084fc" stroke-opacity=".7" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M381 152 A28.5 28.5 0 0 1 437 152" fill="none" stroke="url(#brand)" stroke-width="5" stroke-linecap="round"/>
+  <rect x="372" y="146" width="13" height="22" rx="6" fill="#a855f7"/>
+  <rect x="374" y="149" width="3" height="16" rx="1.5" fill="#e9d5ff" opacity=".6"/>
+  <rect x="433" y="146" width="13" height="22" rx="6" fill="#6d28d9"/>
+
+  <!-- chair -->
+  <rect x="350" y="228" width="118" height="116" rx="26" fill="url(#chair)"/>
+  <path d="M352 330 V254 Q352 230 376 228" fill="none" stroke="#a78bfa" stroke-opacity=".6" stroke-width="1.6" stroke-linecap="round"/>
+  <rect x="362" y="240" width="94" height="92" rx="18" fill="none" stroke="#3f3270" stroke-dasharray="3 4"/>
+  <rect x="345" y="338" width="128" height="14" rx="7" fill="#231c3d"/>
+  <rect x="403" y="352" width="12" height="36" fill="#2a2247"/>
+  <path d="M354 396 H464" stroke="#2c2350" stroke-width="7" stroke-linecap="round"/>
+  <g fill="#17122a" stroke="#5b4a91">
+    <circle cx="358" cy="403" r="5"/><circle cx="409" cy="403" r="5"/><circle cx="460" cy="403" r="5"/>
+  </g>
+
+  <!-- floating cards -->
+  <g class="float">
+    <rect x="34" y="118" width="66" height="42" rx="11" fill="url(#card)" stroke="#8b5cf6" stroke-opacity=".6"/>
+    <text x="67" y="145" font-family="ui-monospace, Menlo, monospace" font-size="16" font-weight="700" fill="url(#brand)" text-anchor="middle">&lt;/&gt;</text>
+  </g>
+  <g class="float2">
+    <rect x="468" y="66" width="92" height="60" rx="12" fill="url(#card)" stroke="#8b5cf6" stroke-opacity=".6"/>
+    <circle cx="480" cy="78" r="2.4" fill="#f472b6"/><circle cx="488" cy="78" r="2.4" fill="#c084fc"/>
+    <rect x="482" y="100" width="10" height="16" rx="2" fill="url(#bar)"/>
+    <rect x="497" y="92"  width="10" height="24" rx="2" fill="url(#bar)"/>
+    <rect x="512" y="104" width="10" height="12" rx="2" fill="url(#bar)"/>
+    <rect x="527" y="86"  width="10" height="30" rx="2" fill="url(#bar)"/>
+    <path d="M487 96 L502 88 L517 98 L532 80" fill="none" stroke="#5eead4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g class="float3">
+    <rect x="30" y="196" width="50" height="40" rx="11" fill="url(#card)" stroke="#8b5cf6" stroke-opacity=".6"/>
+    <path d="M55 204 C56.5 212 59 214.5 67 216 C59 217.5 56.5 220 55 228 C53.5 220 51 217.5 43 216 C51 214.5 53.5 212 55 204 Z" fill="url(#brand)"/>
+  </g>
+</svg>

@@ -53,57 +53,39 @@ npm start
 ## Project Structure
 
 ```
+public/
+├── images/
+│   ├── logos/           # Institution logos
+│   └── projects/        # Project screenshots
+├── portfolio-hero.svg   # Animated hero illustration (served as a plain <img>)
+└── resume.pdf           # Downloadable CV
 src/
-├── app/
-│   ├── layout.tsx       # Root layout with fonts & metadata
-│   ├── page.tsx         # Main portfolio page
-│   └── globals.css      # Global styles & Tailwind
+├── app/                 # Root layout, page, global styles
 ├── components/
-│   ├── layout/          # Navbar, Footer, ScrollToTop
-│   ├── sections/        # Hero, About, Skills, Projects, Labs, Contact
-│   └── ui/              # Reusable UI components
-├── hooks/               # Custom React hooks
-├── lib/
-│   ├── constants.ts     # Data & configuration
-│   └── motion.ts        # Framer Motion variants
-└── types/               # TypeScript type definitions
+│   ├── layout/          # Navbar, Footer, ScrollToTop, MotionProvider
+│   ├── projects/        # Project showcase pieces (preview, details, media)
+│   ├── sections/        # Hero, About, Journey, Projects, Skills, Research, Resume, Contact
+│   └── ui/              # Reusable primitives (Button, Section, Reveal, SpotlightCard, ...)
+├── data/                # All portfolio content
+├── hooks/               # useActiveSection + scroll helpers
+├── lib/                 # motion presets, cn() utility
+└── types/               # Shared TypeScript types
 ```
 
-## Customization
+## Updating Content
 
-### Personal Information
+All content lives in `src/data/`, so sections never need editing to change text:
 
-Edit `src/lib/constants.ts` to update:
-- Name, role, tagline
-- About section points
-- Skills categories
-- Project details
-- Lab/practical work
-- Social links
+| File | Contents |
+|---|---|
+| `site.ts` | Name, roles, tagline, contact info, nav sections, social links |
+| `journey.ts` | Education, experience, achievements |
+| `projects.ts` | Project showcase (order = display order) |
+| `skills.ts` | Skill categories and logos |
+| `research.ts` | Publications |
+| `resume.ts` | Resume-specific project bullets and skill rows (mirrors `assets/Esham_cv.tex`) |
 
-### Styling
-
-- Colors: Modify `tailwind.config.ts`
-- Animations: Adjust variants in `src/lib/motion.ts`
-- Global styles: Edit `src/app/globals.css`
-
-### Adding Projects
-
-Add new projects to the `PROJECTS` array in `src/lib/constants.ts`:
-
-```typescript
-{
-  id: "unique-id",
-  title: "Project Title",
-  subtitle: "Short description",
-  problem: "The problem being solved",
-  solution: "How you solved it",
-  technologies: ["Tech1", "Tech2"],
-  highlights: [{ label: "Metric", value: "100" }],
-  githubUrl: "https://github.com/...",
-  featured: true
-}
-```
+To update the downloadable CV, replace `public/resume.pdf`.
 
 ## Deployment
 
